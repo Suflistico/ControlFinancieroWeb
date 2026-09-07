@@ -1,0 +1,397 @@
+/* =========================================
+   FONDO
+   ========================================= */
+
+.confirmacion-presupuesto-fondo {
+  z-index: 5000;
+}
+
+
+/* =========================================
+   MODAL
+   ========================================= */
+
+.confirmacion-presupuesto {
+  width:
+    min(
+      620px,
+      100%
+    );
+
+  padding: 30px;
+}
+
+
+/* =========================================
+   ICONO
+   ========================================= */
+
+.confirmacion-presupuesto-icono {
+  width: 56px;
+  height: 56px;
+
+  display: grid;
+
+  place-items: center;
+
+  margin-bottom: 17px;
+
+  border-radius: 50%;
+
+  font-size: 25px;
+
+  font-weight: 900;
+}
+
+.confirmacion-icono-amarillo {
+  background: #fff0c9;
+
+  color: #a96e13;
+}
+
+.confirmacion-icono-rojo {
+  background: #ffe0dd;
+
+  color: #bd3f37;
+}
+
+
+/* =========================================
+   CABECERA
+   ========================================= */
+
+.confirmacion-etiqueta-amarilla {
+  color: #a36b14;
+}
+
+.confirmacion-etiqueta-roja {
+  color: #b83c35;
+}
+
+.confirmacion-presupuesto h2 {
+  margin:
+    5px 0 8px;
+
+  color: #29364a;
+
+  font-size: 27px;
+
+  letter-spacing: -0.5px;
+}
+
+.confirmacion-presupuesto-intro {
+  margin:
+    0 0 20px;
+
+  color: #748095;
+
+  line-height: 1.55;
+}
+
+.confirmacion-presupuesto-intro
+strong {
+  color: #3d4c62;
+}
+
+
+/* =========================================
+   MOVIMIENTO
+   ========================================= */
+
+.confirmacion-presupuesto-movimiento {
+  display: grid;
+
+  grid-template-columns:
+    1fr auto 1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 17px;
+
+  padding: 16px;
+
+  border-radius: 13px;
+
+  background: #f6f8fb;
+}
+
+.confirmacion-presupuesto-movimiento
+> div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.confirmacion-presupuesto-movimiento
+span {
+  color: #8490a1;
+
+  font-size: 10px;
+}
+
+.confirmacion-presupuesto-movimiento
+strong {
+  color: #344256;
+
+  font-size: 14px;
+}
+
+.confirmacion-presupuesto-suma {
+  color: #99a3b1 !important;
+
+  font-size: 18px !important;
+
+  font-weight: 800;
+}
+
+
+/* =========================================
+   IMPACTO
+   ========================================= */
+
+.confirmacion-presupuesto-impacto {
+  padding: 17px;
+
+  border-radius: 13px;
+}
+
+.impacto-amarillo {
+  border:
+    1px solid #efd69d;
+
+  background: #fffaf0;
+}
+
+.impacto-rojo {
+  border:
+    1px solid #edb8b3;
+
+  background: #fff5f4;
+}
+
+.confirmacion-impacto-superior {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
+    );
+
+  gap: 10px;
+}
+
+.confirmacion-impacto-superior
+> div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.confirmacion-impacto-superior
+span {
+  color: #7f8999;
+
+  font-size: 10px;
+}
+
+.confirmacion-impacto-superior
+strong {
+  color: #364458;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   BARRA
+   ========================================= */
+
+.confirmacion-barra-fondo {
+  height: 10px;
+
+  overflow: hidden;
+
+  margin-top: 15px;
+
+  border-radius: 999px;
+
+  background: #e6e9ed;
+}
+
+.confirmacion-barra {
+  height: 100%;
+
+  border-radius: inherit;
+}
+
+.confirmacion-barra-amarilla {
+  background:
+    linear-gradient(
+      90deg,
+      #f0c35e,
+      #d69822
+    );
+}
+
+.confirmacion-barra-roja {
+  background:
+    linear-gradient(
+      90deg,
+      #ef756d,
+      #d7443c
+    );
+}
+
+
+/* =========================================
+   PIE IMPACTO
+   ========================================= */
+
+.confirmacion-impacto-pie
+p {
+  margin:
+    13px 0 0;
+
+  color: #68768a;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+.impacto-amarillo
+.confirmacion-impacto-pie
+strong {
+  color: #9b6718;
+}
+
+.impacto-rojo
+.confirmacion-impacto-pie
+strong {
+  color: #b73b34;
+}
+
+
+/* =========================================
+   AVISO
+   ========================================= */
+
+.confirmacion-presupuesto-aviso {
+  margin-top: 14px;
+
+  padding: 14px;
+
+  border-radius: 11px;
+}
+
+.aviso-amarillo {
+  background: #fff8e7;
+
+  color: #735d2d;
+}
+
+.aviso-rojo {
+  background: #fff0ef;
+
+  color: #8f3832;
+}
+
+.confirmacion-presupuesto-aviso
+strong {
+  font-size: 12px;
+}
+
+.confirmacion-presupuesto-aviso
+p {
+  margin:
+    5px 0 0;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   BOTONES
+   ========================================= */
+
+.confirmacion-boton-amarillo,
+.confirmacion-boton-rojo {
+  border: none;
+
+  padding:
+    11px 15px;
+
+  border-radius: 10px;
+
+  color: white;
+
+  font-weight: 800;
+}
+
+.confirmacion-boton-amarillo {
+  background: #d79a27;
+}
+
+.confirmacion-boton-amarillo:hover:not(
+  :disabled
+) {
+  background: #c68a1e;
+}
+
+.confirmacion-boton-rojo {
+  background: #c6423a;
+}
+
+.confirmacion-boton-rojo:hover:not(
+  :disabled
+) {
+  background: #b43831;
+}
+
+.confirmacion-boton-amarillo:disabled,
+.confirmacion-boton-rojo:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (
+  max-width: 650px
+) {
+  .confirmacion-presupuesto {
+    padding: 22px;
+  }
+
+  .confirmacion-presupuesto-movimiento {
+    grid-template-columns:
+      1fr;
+  }
+
+  .confirmacion-presupuesto-suma {
+    transform:
+      rotate(
+        90deg
+      );
+
+    text-align: center;
+  }
+
+  .confirmacion-impacto-superior {
+    grid-template-columns:
+      1fr;
+  }
+}
