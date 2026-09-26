@@ -1124,12 +1124,81 @@ function App() {
 
   /*
    * =========================================
+   * ERROR DE CONEXIÓN INICIAL
+   * =========================================
+   *
+   * No mostramos un panel con valores en cero si
+   * todavía no existe una respuesta válida del servidor.
+   */
+
+  if (
+    error &&
+    !dashboard
+  ) {
+
+    return (
+      <main className="pantalla-conexion" role="main">
+
+        <section
+          className="tarjeta-conexion"
+          aria-labelledby="titulo-error-conexion"
+        >
+
+          <div
+            className="conexion-icono"
+            aria-hidden="true"
+          >
+            !
+          </div>
+
+          <p className="conexion-etiqueta">
+            Conexión interrumpida
+          </p>
+
+          <h1 id="titulo-error-conexion">
+            No pudimos cargar tus datos
+          </h1>
+
+          <p>
+            Revisa tu conexión e inténtalo nuevamente.
+            Tus movimientos guardados no se han modificado.
+          </p>
+
+          <button
+            type="button"
+            className="boton-principal conexion-reintentar"
+            onClick={() =>
+              cargarDatos(
+                true,
+                periodoAnalisis
+              )
+            }
+          >
+            Reintentar conexión
+          </button>
+
+        </section>
+
+      </main>
+    );
+  }
+
+
+  /*
+   * =========================================
    * INTERFAZ
    * =========================================
    */
 
   return (
     <div className="app">
+
+      <a
+        className="saltar-contenido"
+        href="#contenido-principal"
+      >
+        Ir al contenido principal
+      </a>
 
       {mensajeExito && (
 
@@ -1274,6 +1343,30 @@ function App() {
 
           <button
             type="button"
+            className="boton-actualizar"
+            onClick={() =>
+              cargarDatos(
+                true,
+                periodoAnalisis
+              )
+            }
+            disabled={cargando}
+            aria-label="Actualizar información financiera"
+          >
+            <span aria-hidden="true">
+              ↻
+            </span>
+
+            <span className="boton-actualizar-texto">
+              {cargando
+                ? "Actualizando"
+                : "Actualizar"}
+            </span>
+          </button>
+
+
+          <button
+            type="button"
             className="
               boton-principal
               boton-nuevo-movimiento
@@ -1308,13 +1401,32 @@ function App() {
           className="mensaje-error"
           role="alert"
         >
-          {error}
+          <span>
+            {error}
+          </span>
+
+          <button
+            type="button"
+            onClick={() =>
+              cargarDatos(
+                true,
+                periodoAnalisis
+              )
+            }
+            disabled={cargando}
+          >
+            Reintentar
+          </button>
         </div>
 
       )}
 
 
-      <main className="contenido">
+      <main
+        id="contenido-principal"
+        className="contenido"
+        aria-busy={cargando}
+      >
 
         {vista ===
           "dashboard" && (

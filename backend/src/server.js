@@ -51,6 +51,10 @@ const presupuestosRoutes =
 const app =
     express();
 
+app.disable(
+    "x-powered-by"
+);
+
 const PORT =
     process.env.PORT ||
     3001;
@@ -144,7 +148,41 @@ app.use(
 
 
 app.use(
-    express.json()
+    express.json({
+        limit:
+            "100kb"
+    })
+);
+
+
+/*
+ * =====================================================
+ * CABECERAS DE SEGURIDAD BÁSICAS
+ * =====================================================
+ */
+
+app.use(
+    (
+        req,
+        res,
+        next
+    ) => {
+        res.set({
+            "X-Content-Type-Options":
+                "nosniff",
+
+            "X-Frame-Options":
+                "DENY",
+
+            "Referrer-Policy":
+                "no-referrer",
+
+            "Permissions-Policy":
+                "camera=(), microphone=(), geolocation=()"
+        });
+
+        next();
+    }
 );
 
 
@@ -167,6 +205,57 @@ app.get(
             mensaje:
                 "API Control Financiero funcionando"
         });
+    }
+);
+
+
+/*
+ * =====================================================
+ * ESTADO DEL SERVICIO
+ * =====================================================
+ */
+
+app.get(
+    "/api/health",
+    async (
+        req,
+        res
+    ) => {
+        try {
+            await pool.query(
+                "SELECT 1"
+            );
+
+            res.json({
+                ok:
+                    true,
+
+                servicio:
+                    "control-financiero-api",
+
+                base_datos:
+                    "disponible"
+            });
+
+        } catch (error) {
+            console.error(
+                "La verificación de salud falló:",
+                error
+            );
+
+            res
+                .status(503)
+                .json({
+                    ok:
+                        false,
+
+                    servicio:
+                        "control-financiero-api",
+
+                    base_datos:
+                        "no disponible"
+                });
+        }
     }
 );
 
@@ -349,6 +438,22 @@ app.use(
         }
 
 
+        if (
+            error.type ===
+            "entity.too.large"
+        ) {
+            return res
+                .status(413)
+                .json({
+                    ok:
+                        false,
+
+                    mensaje:
+                        "La solicitud supera el tamaño permitido."
+                });
+        }
+
+
         res
             .status(500)
             .json({
@@ -372,23 +477,86 @@ app.use(
  * =====================================================
  */
 
-app.listen(
-    PORT,
-    "0.0.0.0",
-    () => {
-        console.log(
-            `Servidor ejecutándose en puerto ${PORT}`
+const iniciarServidor = (
+    puerto = PORT,
+    host = "0.0.0.0"
+) => {
+    const servidor =
+        app.listen(
+            puerto,
+            host,
+            () => {
+                const direccion =
+                    servidor.address();
+
+                const puertoActivo =
+                    direccion &&
+                    typeof direccion ===
+                        "object"
+                        ? direccion.port
+                        : puerto;
+
+                console.log(
+                    `Servidor ejecutándose en puerto ${puertoActivo}`
+                );
+
+                console.log(
+                    `Entorno: ${process.env.NODE_ENV || "development"}`
+                );
+
+                console.log(
+                    `Frontend permitido: ${
+                        process.env.FRONTEND_URL ||
+                        "http://localhost:3000"
+                    }`
+                );
+            }
         );
 
-        console.log(
-            `Entorno: ${process.env.NODE_ENV || "development"}`
-        );
+    return servidor;
+};
 
-        console.log(
-            `Frontend permitido: ${
-                process.env.FRONTEND_URL ||
-                "http://localhost:3000"
-            }`
-        );
-    }
-);
+
+if (
+    require.main ===
+    module
+) {
+    const servidor =
+        iniciarServidor();
+
+    const cerrarServidor =
+        (senal) => {
+            console.log(
+                `${senal} recibida. Cerrando servidor...`
+            );
+
+            servidor.close(
+                async () => {
+                    await pool.end();
+                    process.exit(0);
+                }
+            );
+        };
+
+    process.once(
+        "SIGTERM",
+        () =>
+            cerrarServidor(
+                "SIGTERM"
+            )
+    );
+
+    process.once(
+        "SIGINT",
+        () =>
+            cerrarServidor(
+                "SIGINT"
+            )
+    );
+}
+
+
+module.exports = {
+    app,
+    iniciarServidor
+};

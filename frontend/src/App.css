@@ -102,6 +102,26 @@ textarea:focus-visible {
   padding-top: 104px;
 }
 
+.saltar-contenido {
+  position: fixed;
+  z-index: 5000;
+  top: 12px;
+  left: 12px;
+  transform: translateY(-160%);
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #172033;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.saltar-contenido:focus {
+  transform: translateY(0);
+}
+
 
 /* =========================================
    ENCABEZADO FIJO
@@ -457,6 +477,43 @@ textarea:focus-visible {
   font-weight: 600;
 
   line-height: 1;
+}
+
+.boton-actualizar {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border: 1px solid #d8e0eb;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #526178;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.boton-actualizar:hover:not(:disabled) {
+  border-color: #a9c6f5;
+  color: #1f6feb;
+}
+
+.boton-actualizar:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.boton-actualizar:disabled {
+  opacity: 0.58;
+}
+
+.boton-actualizar:disabled span:first-child {
+  animation: girar 0.8s linear infinite;
 }
 
 
@@ -2219,9 +2276,36 @@ select:focus {
 
   color: #b83b35;
 
-  font-size: 11px;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  font-size: 14px;
 
   font-weight: 700;
+}
+
+.mensaje-error button {
+  flex-shrink: 0;
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid #e6aaa5;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #a52f2a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.mensaje-error button:hover:not(:disabled) {
+  background: #fffafa;
+}
+
+.mensaje-error button:disabled {
+  opacity: 0.55;
 }
 
 
@@ -2311,6 +2395,73 @@ select:focus {
   gap: 14px;
 
   color: #647085;
+}
+
+.pantalla-conexion {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(31, 111, 235, 0.11),
+      transparent 38%
+    ),
+    #f4f7fb;
+}
+
+.tarjeta-conexion {
+  width: min(100%, 480px);
+  padding: 40px;
+  border: 1px solid #dfe6f0;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 22px 60px rgba(24, 39, 75, 0.12);
+  text-align: center;
+}
+
+.conexion-icono {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #fff0ef;
+  color: #c53e38;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.conexion-etiqueta {
+  margin: 0 0 7px;
+  color: #c53e38;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tarjeta-conexion h1 {
+  margin: 0;
+  color: #172033;
+  font-size: clamp(26px, 5vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.8px;
+}
+
+.tarjeta-conexion > p:not(.conexion-etiqueta) {
+  margin: 16px auto 24px;
+  color: #68758a;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.conexion-reintentar {
+  width: 100%;
+  min-height: 48px;
+  font-size: 15px;
 }
 
 .pantalla-cargando p {
@@ -2524,6 +2675,26 @@ select:focus {
     align-items: center;
 
     gap: 8px;
+  }
+
+  .boton-actualizar-texto {
+    display: none;
+  }
+
+  .boton-actualizar {
+    width: 42px;
+    padding: 9px;
+  }
+
+  .mensaje-error {
+    width: calc(100% - 20px);
+    align-items: flex-start;
+    font-size: 13px;
+  }
+
+  .tarjeta-conexion {
+    padding: 30px 22px;
+    border-radius: 20px;
   }
 
   .navegacion {
